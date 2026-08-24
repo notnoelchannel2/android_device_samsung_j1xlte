@@ -73,14 +73,31 @@ void vendor_load_properties()
 {
 	std::string bl = GetProperty("ro.bootloader", "");
 
-	if (bl.find("J200GU") != std::string::npos) {
-		property_override("ro.product.model", "J200GU");
-	} else if (bl.find("J200M") != std::string::npos) {
-		property_override("ro.product.model", "J200M");
-	} else if (bl.find("J200F") != std::string::npos) {
-		property_override("ro.product.model", "J200F");
-	} else if (bl.find("J200BT") != std::string::npos) {
-		property_override("ro.product.model", "J200BT");
-	}	
+	if (bl.find("FA51_J120") != std::string::npos) {
+	        ERROR("Found LL combination bootloader, setting build properties for SM-J120F");
+		property_override("ro.product.model", "SM-J120F");
+	} else if (bl.find("FA60_J120") != std::string::npos) {
+	        ERROR("Found MM combination bootloader, setting build properties for SM-J120W");
+		property_override("ro.product.model", "SM-J120W");
+	} else if (bl.find("J120FN") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120FN");
+	} else if (bl.find("J120F") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120F");
+	} else if (bl.find("J120M") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120M");
+	} else if (bl.find("J120ZN") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120ZN");
+	} else if (bl.find("J120G") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120G");
+	} else if (bl.find("J120W") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120W");
+	} else if (bl.find("J120AZ") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120AZ");
+	} else if (bl.find("J120A") != std::string::npos) {
+		property_override("ro.product.model", "SM-J120A");
+	} else {
+	        ERROR("Could not found any supported device/bootloader, forcing build properties to SM-J120X");
+	        property_override("ro.product.model", "SM-J120X");
+	}
 	set_sim_info();
 }
